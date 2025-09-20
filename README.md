@@ -69,3 +69,13 @@ task-manager/
   .env.example
   README.md
 ```
+
+## Screenshots
+
+### Hero Section
+
+![Hero Section](./screenshots/HeroSection.png)
+
+### Task Input
+
+![Task Input](./screenshots/TaskInput.png)
