@@ -33,40 +33,36 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="relative bg-[var(--color-background)] py-2 px-4 border-t border-[var(--color-secondary)]/20 z-10 overflow-hidden max-h-[120px] w-full">
-      {/* Footer Content */}
-      <div className="relative z-10">
-        <div className="container mx-auto max-w-6xl">
-          <div className="flex flex-col md:flex-row justify-between items-center md:items-start">
-            {/* Social Links */}
-            <div className="flex flex-col items-center order-2 md:order-1 md:mt-0">
-              <div className="flex space-x-3 mb-2">
-                {socialLinks.map((link, index) => (
-                  <a
-                    key={index}
-                    href={link.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="p-2 bg-[var(--color-surface)] hover:bg-[var(--color-accent)] rounded-full transition-all duration-200 hover:scale-110 text-[var(--color-primary)] hover:text-white"
-                    aria-label={link.name}
-                  >
-                    {link.icon}
-                  </a>
-                ))}
-              </div>
-            </div>
-            {/* Logo and tagline */}
-            <div className="order-1 md:order-2">
-              <div className="flex flex-col items-center space-y-2 mb-0">
-                <span className="text-[var(--color-secondary)] text-xs">
-                  Manage your tasks efficiently with TaskManager
-                </span>
-              </div>
-            </div>
+    <footer className="relative bg-[var(--color-background)] py-4 px-4 border-t border-[var(--color-secondary)]/20 z-10 overflow-hidden w-full">
+      <div className="container mx-auto max-w-6xl">
+        <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+          {/* Logo and tagline */}
+          <div className="flex flex-col items-center md:items-start">
+            <span className="text-[var(--color-primary)] font-bold text-lg tracking-tight">
+              TaskManager
+            </span>
+            <span className="text-[var(--color-primary)] text-xs mt-1">
+              Manage your tasks efficiently with TaskManager
+            </span>
+          </div>
+          {/* Social Links */}
+          <div className="flex flex-row items-center space-x-3">
+            {socialLinks.map((link, index) => (
+              <a
+                key={index}
+                href={link.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-2 bg-[var(--color-surface)] hover:bg-[var(--color-accent)] rounded-full transition-all duration-200  text-[var(--color-primary)] hover:text-white"
+                aria-label={link.name}
+              >
+                {link.icon}
+              </a>
+            ))}
           </div>
         </div>
         {/* Copyright */}
-        <div className="text-center text-[var(--color-secondary)] text-xs pt-1">
+        <div className="text-center text-[var(--color-primary)] text-xs pt-3 border-t border-[var(--color-primary)]/10 mt-4">
           <p>
             &copy; {new Date().getFullYear()}{" "}
             <span className="text-[var(--color-primary)] font-semibold">
@@ -74,7 +70,7 @@ export default function Footer() {
             </span>
             . All rights reserved.
           </p>
-          <p className="mt-0.5 text-[var(--color-accent)] font-medium">
+          <p className="mt-0.5 text-[var(--color-primary)] font-medium">
             Built for smarter task management.
           </p>
         </div>
