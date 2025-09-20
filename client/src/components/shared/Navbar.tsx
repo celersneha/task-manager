@@ -1,56 +1,54 @@
-import { NavLink } from "react-router";
+import { NavLink, useNavigate } from "react-router";
 import { useState } from "react";
 import { useAuth } from "../../context/AuthContext";
 import AuthDialog from "../ui/Auth/AuthDialog";
+import { Button } from "../ui/button";
 
 const Navbar = () => {
   const { user, logout } = useAuth();
   const [authOpen, setAuthOpen] = useState(false);
+  const navigate = useNavigate();
 
   const handleSignOut = async () => {
     await logout();
+    navigate("/");
   };
 
   return (
-    <nav className="flex p-4 border-b border-gray-200 justify-between">
-      <div>
-        <NavLink to="/" className="font-bold text-lg">
+    <nav className="flex items-center justify-between px-8 py-4 bg-[color:var(--card)]/80 border-b border-[color:var(--border)] shadow-sm sticky top-0 z-50 backdrop-blur-lg">
+      <div className="flex items-center gap-4">
+        <NavLink
+          to="/"
+          className="font-extrabold text-2xl tracking-tight text-[color:var(--accent)] hover:text-[color:var(--primary)] transition-colors"
+        >
           TaskManager
         </NavLink>
+
+        {user && (
+          <NavLink
+            to="/task-manager"
+            className="ml-4 text-[color:var(--foreground)] hover:text-[color:var(--accent)] font-medium transition-colors"
+          >
+            Task Manager
+          </NavLink>
+        )}
       </div>
-      <div className="flex items-center">
-        <NavLink to="/" className="mr-4">
-          Home
-        </NavLink>
-        <NavLink to="/projects" className="mr-4">
-          Projects
-        </NavLink>
-        <NavLink to="/about" className="mr-4">
-          About
-        </NavLink>
-        <a
-          href="https://github.com/"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="mr-4"
-        >
-          Github
-        </a>
+      <div className="flex items-center gap-4">
         {user ? (
-          <button
+          <Button
             onClick={handleSignOut}
-            className="bg-red-500 text-white px-4 py-1 rounded"
+            className="bg-[color:var(--accent)] hover:bg-[color:var(--destructive)] text-[color:var(--accent-foreground)] px-6 py-2 rounded-xl font-semibold shadow transition-colors"
           >
             Sign Out
-          </button>
+          </Button>
         ) : (
           <>
-            <button
+            <Button
               onClick={() => setAuthOpen(true)}
-              className="bg-blue-500 text-white px-4 py-1 rounded"
+              className="bg-[color:var(--primary)] hover:bg-[color:var(--accent)] text-[color:var(--primary-foreground)] px-6 py-2 rounded-xl font-semibold shadow transition-colors"
             >
-              Sign In / Sign Up
-            </button>
+              Sign In
+            </Button>
             {authOpen && <AuthDialog onClose={() => setAuthOpen(false)} />}
           </>
         )}
