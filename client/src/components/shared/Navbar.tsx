@@ -16,24 +16,23 @@ const Navbar = () => {
 
   return (
     <nav className="flex items-center justify-between px-8 py-4 bg-[color:var(--card)]/80 border-b border-[color:var(--border)] shadow-sm sticky top-0 z-50 backdrop-blur-lg">
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-4 justify-between">
         <NavLink
           to="/"
           className="font-extrabold text-2xl tracking-tight text-[color:var(--accent)] hover:text-[color:var(--primary)] transition-colors"
         >
           TaskManager
         </NavLink>
-
+      </div>
+      <div className="flex items-center gap-4">
         {user && (
           <NavLink
             to="/task-manager"
-            className="ml-4 text-[color:var(--foreground)] hover:text-[color:var(--accent)] font-medium transition-colors"
+            className="text-[color:var(--foreground)] hover:text-[color:var(--accent)] font-medium transition-colors"
           >
-            Task Manager
+            Task List
           </NavLink>
         )}
-      </div>
-      <div className="flex items-center gap-4">
         {user ? (
           <Button
             onClick={handleSignOut}
