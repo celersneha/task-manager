@@ -4,6 +4,7 @@ import { AuthContext } from "./AuthContext";
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   const login = async (
     email?: string,
@@ -15,7 +16,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       username,
       password,
     });
-    setUser(response.data.data.user); // <-- update here if needed
+    setUser(response.data.data.user);
     return response.data;
   };
 
@@ -36,23 +37,38 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       username,
       password,
     });
-    setUser(response.data.data); // backend returns user in data
+    setUser(response.data.data.user);
     return response.data;
   };
 
   const getCurrentUser = async () => {
     const response = await API.get("/users/getCurrentUser");
-
-    setUser(response.data.data); // backend returns user in data
+    console.log(response);
+    setUser(response.data.data);
     return response.data;
   };
 
   useEffect(() => {
-    getCurrentUser();
+    const fetchUser = async () => {
+      try {
+        await getCurrentUser();
+        console.log("User fetched successfully");
+      } catch (error) {
+        console.log("Error fetching user:", error);
+        setUser(null);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchUser();
   }, []);
 
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
   return (
-    <AuthContext.Provider value={{ user, login, logout, register }}>
+    <AuthContext.Provider value={{ user, login, logout, register, loading }}>
       {children}
     </AuthContext.Provider>
   );
