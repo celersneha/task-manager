@@ -1,10 +1,11 @@
 import express from "express";
 import cors from "cors";
 import userRoutes from "./routes/user.route";
+import taskRoutes from "./routes/task.route";
 import cookieParser from "cookie-parser";
 
 const PORT = process.env.PORT || 8000;
-// Extend Express Request type to include 'auth'
+
 declare global {
   namespace Express {
     interface Request {
@@ -30,8 +31,8 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api/users", userRoutes);
+app.use("/api/tasks", taskRoutes);
 
-// Add error handling middleware
 app.use(
   (
     error: any,
@@ -39,7 +40,9 @@ app.use(
     res: express.Response,
     next: express.NextFunction
   ) => {
-    res.status(500).json({ error: "Something went wrong!" });
+    const statusCode = error.statusCode || 500;
+    const message = error.message || "Something went wrong!";
+    res.status(statusCode).json({ message });
   }
 );
 
