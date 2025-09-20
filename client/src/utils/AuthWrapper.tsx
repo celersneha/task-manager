@@ -2,7 +2,6 @@ import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router";
 import { useEffect, useState } from "react";
 
-// HOC version
 function withAuth<T extends React.PropsWithChildren<unknown>>(
   Component: React.ComponentType<T>
 ) {
