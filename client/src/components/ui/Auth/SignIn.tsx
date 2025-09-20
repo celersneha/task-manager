@@ -14,6 +14,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
+import { toast } from "sonner";
 
 const schema = z.object({
   emailOrUsername: z.string().min(2, "Email or Username is required"),
@@ -37,15 +38,12 @@ const SignIn = ({ onSuccess }: { onSuccess: () => void }) => {
   const onSubmit = async (data: FormData) => {
     setError("");
     try {
-      // Try email first, fallback to username
       await login(data.emailOrUsername, data.password);
       onSuccess();
-      navigate("/app");
+      navigate("/task-manager");
     } catch (err: unknown) {
-      setError(
-        (err as any)?.response?.data?.message ||
-          (typeof err === "string" ? err : "Sign in failed")
-      );
+      console.error(err);
+      toast.error((err as any)?.response?.data?.message || "Failed to sign in");
     }
   };
 

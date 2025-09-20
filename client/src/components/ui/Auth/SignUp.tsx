@@ -46,11 +46,11 @@ const SignUp = ({ onSuccess }: { onSuccess: () => void }) => {
         data.fullName,
         data.email,
         data.username,
-        data.password,
-        data.fullName
+        data.password
       );
       onSuccess();
-      toast.success("User registered successfully. Please sign in.");
+      navigate("/task-manager");
+      toast.success("User registered successfully.");
     } catch (err: unknown) {
       setError(
         (err as any)?.response?.data?.message ||
