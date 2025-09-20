@@ -12,7 +12,8 @@
   "scripts": {
     "build": "bun build src/index.ts --outdir dist --target bun",
     "start": "bun run dist/index.js",
-    "dev": "bun --watch run src/index.ts"
+    "dev": "bun --watch run src/index.ts",
+    "test": "bun test"
   },
   "peerDependencies": {
     "typescript": "^5"
