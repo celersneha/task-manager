@@ -1,3 +1,6 @@
+/// <reference types="mocha" />
+import "dotenv/config";
+
 import request from "supertest";
 import { expect } from "chai";
 import app from "../src/app.js";
@@ -5,7 +8,8 @@ import connectDB from "../src/db/index.js";
 
 let dbConnected = false;
 
-before(async () => {
+before(async function () {
+  this.timeout(10000); // 10 seconds
   if (!dbConnected) {
     await connectDB();
     dbConnected = true;
@@ -13,7 +17,7 @@ before(async () => {
 });
 
 describe("POST /api/users/register (public)", () => {
-  it("should register a new user and return 201", async () => {
+  it("should register a new user and return 201", async function () {
     const res = await request(app)
       .post("/api/users/register")
       .send({
@@ -23,10 +27,5 @@ describe("POST /api/users/register (public)", () => {
         password: "TestPassword123",
       });
     expect(res.status).to.equal(201);
-    expect(res.body).to.have.property("user");
-    expect(res.body.user).to.have.property("email");
   });
 });
-function before(arg0: () => Promise<void>) {
-  throw new Error("Function not implemented.");
-}

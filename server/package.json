@@ -10,17 +10,19 @@
     "@types/mocha": "^10.0.10",
     "@types/supertest": "^6.0.3",
     "chai": "^6.0.1",
+    "esm": "^3.2.25",
     "mocha": "^11.7.2",
     "nodemon": "^3.1.10",
     "supertest": "^7.1.4",
     "ts-node": "^10.9.2",
+    "tsx": "^4.20.5",
     "typescript": "^5.9.2"
   },
   "scripts": {
     "dev": "nodemon --watch src --exec \"node --loader ts-node/esm\" src/index.ts",
     "build": "tsc",
     "start": "node dist/index.js",
-    "test": "NODE_ENV=test mocha --loader ts-node/esm \"test/**/*.test.ts\""
+    "test": "tsx node_modules/mocha/bin/mocha \"test/**/*.test.ts\""
   },
   "dependencies": {
     "@types/express": "^5.0.3",
