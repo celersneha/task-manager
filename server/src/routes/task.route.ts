@@ -1,5 +1,10 @@
 import { Router } from "express";
-import { addTask, updateTask, deleteTask, getAllTasks } from "../controllers/task.controller.js";
+import {
+  addTask,
+  updateTask,
+  deleteTask,
+  getAllTasks,
+} from "../controllers/task.controller.js";
 import { verifyJWT } from "../middleware/auth.middleware.js";
 
 const router = Router();
@@ -8,7 +13,7 @@ const router = Router();
 router.use(verifyJWT);
 
 // Task CRUD routes
-router.route("/").get(getAllTasks).post(addTask);
-router.route("/:id").put(updateTask).delete(deleteTask);
+router.route("/").get(getAllTasks).post(verifyJWT, addTask);
+router.route("/:id").put(updateTask).delete(verifyJWT, deleteTask);
 
 export default router;
