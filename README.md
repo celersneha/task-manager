@@ -33,7 +33,7 @@ bun run dev
 ### Frontend
 
 ```bash
-cd frontend
+cd client
 bun install
 bun run dev
 ```
@@ -45,11 +45,8 @@ Basic tests are included for at least one backend endpoint or a frontend compone
 ```bash
 # Example for backend
 cd server
-npm test
+bun test
 
-# Example for frontend
-cd client
-npm test
 ```
 
 ## Design Choices
