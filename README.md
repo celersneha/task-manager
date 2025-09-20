@@ -15,7 +15,6 @@ A simple Task Manager application with user authentication and task CRUD functio
 ### Prerequisites
 
 - Node.js (v18+ recommended)
-- bun
 - MongoDB (depending on backend choice)
 
 ### Environment Variables
@@ -26,16 +25,16 @@ Copy `.env.example` to `.env` and fill in the required values.
 
 ```bash
 cd server
-bun install
-bun run dev
+npm install
+npm run dev
 ```
 
 ### Frontend
 
 ```bash
 cd client
-bun install
-bun run dev
+npm install
+npm run dev
 ```
 
 ## Testing
@@ -45,7 +44,7 @@ Basic tests are included for at least one backend endpoint or a frontend compone
 ```bash
 # Example for backend
 cd server
-bun test
+npm test
 
 ```
 

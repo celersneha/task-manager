@@ -43,7 +43,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
   const getCurrentUser = async () => {
     const response = await API.get("/users/getCurrentUser");
-    console.log(response);
+
     setUser(response.data.data);
     return response.data;
   };
@@ -52,9 +52,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const fetchUser = async () => {
       try {
         await getCurrentUser();
-        console.log("User fetched successfully");
       } catch (error) {
-        console.log("Error fetching user:", error);
         setUser(null);
       } finally {
         setLoading(false);

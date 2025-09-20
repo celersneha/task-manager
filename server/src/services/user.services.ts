@@ -1,7 +1,7 @@
-import { User } from "../models/user.model";
-import { ApiError } from "../utils/ApiError";
+import { User } from "../models/user.model.js";
+import { ApiError } from "../utils/ApiError.js";
 import type { HydratedDocument } from "mongoose";
-import type { IUserDocument } from "../types/types";
+import type { IUserDocument } from "../types/types.js";
 
 export const getUserById = async (
   userId: string
@@ -74,16 +74,6 @@ export const createUser = async (userData: {
   return { user, createdUser };
 };
 
-export const updateUserRefreshToken = async (
-  userId: string,
-  refreshToken: string
-) => {
-  const user = await getUserById(userId);
-  user.refreshToken = refreshToken;
-  await user.save({ validateBeforeSave: false });
-  return user;
-};
-
 export const clearUserRefreshToken = async (userId: string) => {
   await User.findByIdAndUpdate(
     userId,
@@ -103,13 +93,18 @@ export const generateTokensForUser = async (userId: string) => {
     if (!userId) throw new ApiError(400, "User ID is required");
 
     const user = await getUserById(userId);
-    const accessToken = await user.generateAccessToken();
-    const refreshToken = await user.generateRefreshToken();
 
-    await updateUserRefreshToken(userId, refreshToken);
+    // Remove 'await' - these are synchronous methods
+    const accessToken = user.generateAccessToken();
+    const refreshToken = user.generateRefreshToken();
+
+    // Update user's refresh token in database
+    user.refreshToken = refreshToken;
+    await user.save({ validateBeforeSave: false });
 
     return { accessToken, refreshToken };
   } catch (error) {
+    console.error("Error in generateTokensForUser:", error);
     throw new ApiError(500, "Something went wrong while generating tokens");
   }
 };

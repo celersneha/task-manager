@@ -1,12 +1,12 @@
-import { ApiResponse } from "../utils/ApiResponse";
-import { asyncHandler } from "../utils/asyncHandler";
+import { ApiResponse } from "../utils/ApiResponse.js";
+import { asyncHandler } from "../utils/asyncHandler.js";
 import {
   createTask,
   updateTaskById,
   deleteTaskById,
   getTasksByUser,
   validateTaskData,
-} from "../services/task.services";
+} from "../services/task.services.js";
 
 // Add Task
 const addTask = asyncHandler(async (req, res) => {

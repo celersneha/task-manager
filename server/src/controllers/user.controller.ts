@@ -1,6 +1,6 @@
-import { ApiError } from "../utils/ApiError";
-import { asyncHandler } from "../utils/asyncHandler";
-import { ApiResponse } from "../utils/ApiResponse";
+import { ApiError } from "../utils/ApiError.js";
+import { asyncHandler } from "../utils/asyncHandler.js";
+import { ApiResponse } from "../utils/ApiResponse.js";
 import jwt from "jsonwebtoken";
 import {
   getUserById,
@@ -10,7 +10,7 @@ import {
   generateTokensForUser,
   validateUserCredentials,
   clearUserRefreshToken,
-} from "../services/user.services";
+} from "../services/user.services.js";
 
 const setCookieOptions = () => ({
   httpOnly: true,
@@ -65,7 +65,9 @@ const loginUser = asyncHandler(async (req, res) => {
   }
 
   const user = await validateUserCredentials(email, username, password);
+
   const { accessToken, refreshToken } = await generateTokensForUser(user._id);
+
   const loggedInUser = await getUserByIdWithoutSensitiveData(user._id);
   const options = setCookieOptions();
 

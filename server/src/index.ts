@@ -1,6 +1,7 @@
+import "dotenv/config"; // This should be first
 import app from "./app.js";
-
 import connectDB from "./db/index.js";
+
 connectDB()
   .then(() => {
     app.get("/", (req, res) => {

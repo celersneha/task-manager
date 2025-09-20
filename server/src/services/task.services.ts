@@ -1,5 +1,5 @@
-import { Task } from "../models/task.model";
-import { ApiError } from "../utils/ApiError";
+import { Task } from "../models/task.model.js";
+import { ApiError } from "../utils/ApiError.js";
 import { Types } from "mongoose";
 
 export const createTask = async (taskData: {

@@ -1,7 +1,7 @@
 import express from "express";
 import cors from "cors";
-import userRoutes from "./routes/user.route";
-import taskRoutes from "./routes/task.route";
+import userRoutes from "./routes/user.route.js";
+import taskRoutes from "./routes/task.route.js";
 import cookieParser from "cookie-parser";
 
 const PORT = process.env.PORT || 8000;
