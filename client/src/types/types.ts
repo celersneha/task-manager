@@ -1,15 +1,14 @@
-// 1. Context object
 export interface AuthContextType {
   user: User | null;
-  login: (email: string, password: string) => Promise<User | null>;
+  login: (email?: string, password?: string, username?: string) => Promise<any>;
   logout: () => Promise<void>;
   register: (
-    name: string,
+    fullName: string,
     email: string,
-    password: string,
     username: string,
-    fullName: string
-  ) => Promise<User | null>;
+    password: string
+  ) => Promise<any>;
+  loading: boolean;
 }
 
 export interface User {
@@ -17,4 +16,16 @@ export interface User {
   email: string;
   username: string;
   fullName: string;
+  createdAt?: string;
+  updatedAt?: string;
+}
+
+export interface Task {
+  _id: string;
+  title: string;
+  description?: string;
+  isCompleted: boolean;
+  user: string;
+  createdAt: string;
+  updatedAt: string;
 }
