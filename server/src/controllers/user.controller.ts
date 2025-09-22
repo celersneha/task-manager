@@ -147,6 +147,8 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
 
 //get current user logic
 const getCurrentUser = asyncHandler(async (req, res) => {
+  console.log("Current User:", req.user);
+  console.log(process.env.CLIENT_URL);
   return res
     .status(200)
     .json(new ApiResponse(200, req.user, "User fetched successfully"));
