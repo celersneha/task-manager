@@ -12,9 +12,13 @@ import {
   clearUserRefreshToken,
 } from "../services/user.services.js";
 
-const setCookieOptions = () => ({
+import type { CookieOptions } from "express";
+
+const setCookieOptions = (): CookieOptions => ({
   httpOnly: true,
-  secure: true,
+  secure: process.env.NODE_ENV === "production",
+  sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+  maxAge: 24 * 60 * 60 * 1000,
 });
 
 //Registration of user logic
